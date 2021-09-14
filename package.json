@@ -1,5 +1,5 @@
 {
-  "name": "hr-rpp29-mvp",
+  "name": "picture-to-poetry-converter",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,15 +11,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sunikkim/hr-rpp29-mvp.git"
+    "url": "git+https://github.com/sunikkim/picture-to-poetry-converter.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/sunikkim/hr-rpp29-mvp/issues"
+    "url": "https://github.com/sunikkim/picture-to-poetry-converter/issues"
   },
-  "homepage": "https://github.com/sunikkim/hr-rpp29-mvp#readme",
+  "homepage": "https://github.com/sunikkim/picture-to-poetry-converter#readme",
   "devDependencies": {
     "@babel/cli": "^7.1.0",
     "@babel/core": "^7.1.0",
