@@ -22,4 +22,4 @@ Once set up, the app is as simple as can be: just upload an image and the rest i
 This is a free and open source project. Feel free to take the ideas applied here and run with them — maybe even in a more useful and practical direction!
 
 ## Demo ##
-![](http://g.recordit.co/WkXvjepgR3.gif)
+![]('./picture-to-poetry-demo.gif')
