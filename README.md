@@ -21,7 +21,7 @@ Finally, you'll need to create a 'photos' folder under public (it is already .gi
 
 Once set up, the app is as simple as can be: just upload an image and the rest is on us.
 
-This is a free and open source project. Feel free to take the ideas applied here and run with them — maybe even in a more useful and practical direction!
+This is a free and open source project primarily built with React, Express.js, Node.js, and MongoDB as well as the Google Vision API. Feel free to take the ideas applied here and run with them — maybe even in a more useful and practical direction!
 
 ## Demo ##
 ![](picture-to-poetry-demo.gif)
