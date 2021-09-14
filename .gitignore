@@ -37,5 +37,6 @@ bower_components/
 *.jpg
 
 vKEY.json
+.env
 
 public/photos
