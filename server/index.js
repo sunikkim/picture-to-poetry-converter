@@ -1,16 +1,16 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-const port = 5000;
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const save = require('../database/index.js').save;
 const get = require('../database/index.js').get;
 const multer = require('multer');
+require('dotenv').config();
 
 const vision = require('@google-cloud/vision');
 const client = new vision.ImageAnnotatorClient({
-  keyFilename: './vKEY.json'
+  keyFilename: process.env.VISION_KEY_FILEPATH
 });
 
 const storage = multer.diskStorage({
@@ -23,7 +23,6 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({storage: storage}).single('file');
-const dir = '/Users/sunikkim/Desktop/coding/HR-IMMERSIVE/hr-rpp29-mvp';
 
 app.use(cors());
 app.use(bodyParser.urlencoded({
@@ -38,15 +37,15 @@ app.get('/images', (req, res) => {
   })
 });
 
-app.post('/upload', (req, res) => {
+app.post('/images', (req, res) => {
   upload(req, res, (err) => {
     if (err) {
-      console.log('err', err);
+      console.log(err);
       res.sendStatus(500);
     }
 
     client
-      .labelDetection(path.join(dir, req.file.path))
+      .labelDetection(path.join(__dirname, '../', req.file.path))
       .then((results) => {
         const labels = results[0].labelAnnotations;
         let labelsArray = [];
@@ -59,11 +58,11 @@ app.post('/upload', (req, res) => {
 
       })
       .catch((err) => {
-        console.error('ERROR:', err);
+        console.error(err);
       })
   });
 });
 
-app.listen(port, () => {
-  console.log(`App listening at port ${port}`);
+app.listen(process.env.PORT, () => {
+  console.log(`App listening at port ${process.env.PORT}`);
 });

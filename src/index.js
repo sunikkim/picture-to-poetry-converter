@@ -21,7 +21,7 @@ class App extends Component {
   }
 
   getImages() {
-    axios.get('http://localhost:5000/images')
+    axios.get(`http://localhost:${process.env.PORT}/images`)
       .then(res => {
         let imagePathArr = [];
         let labelsArr = [];
@@ -56,7 +56,7 @@ class App extends Component {
     const data = new FormData();
     data.append('file', e.target.files[0]);
 
-    axios.post('http://localhost:5000/upload', data)
+    axios.post(`http://localhost:${process.env.PORT}/images`, data)
       .then((res) => {
         this.getImages();
       });
@@ -70,7 +70,7 @@ class App extends Component {
         <input type="file" name="file" onChange={this.uploadHandler}/>
         <div id="display">
         {this.state.photos.map(photo => (
-          <img key={photo} src={`http://localhost:5000/photos/${photo}`} width="150px" height="150px"/>
+          <img key={photo} src={`http://localhost:${process.env.PORT}/photos/${photo}`} width="150px" height="150px"/>
         ))}
         {this.state.labels.map(label => (
           <div key={label} className="text">{label}</div>

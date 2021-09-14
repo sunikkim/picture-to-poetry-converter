@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/testDB', {
+mongoose.connect(`mongodb://localhost/${process.env.DB_NAME}`, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
@@ -48,6 +48,6 @@ const get = (cb) => {
 }
 
 module.exports = {
-  save: save,
-  get: get
+  save,
+  get
 };
