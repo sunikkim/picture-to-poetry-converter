@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import axios from 'axios';
+const port = process.env.PORT || 5000;
 
 const randomPoetry = ['the', 'and', 'which', 'is', 'suddenly', 'almost', 'into', 'finally', 'intense', 'not', 'all', 'much', 'very', 'this', 'sleeps', 'talks', '...', '...?', '—', '(', ')', 'then', 'we', "don't", 'but', "can't", 'tells', 'unless', 'one', 'with', 'or', 'but', 'did', '...!', 'then', 'also', 'to', 'towards', 'went', 'wants', 'until', 'and', 'and', 'a', 'a', 'an', 'is', 'between', 'is like', 'decides', 'cannot wait until', 'certainly', 'is unlikely to', 'turns into', 'becomes', 'mimics', 'increases', 'gathers', 'predicts', '—', '-', 'is very', 'is like', 'hates', 'loves'];
 
@@ -21,7 +22,7 @@ class App extends Component {
   }
 
   getImages() {
-    axios.get(`http://localhost:${process.env.PORT}/images`)
+    axios.get(`http://localhost:${port}/images`)
       .then(res => {
         let imagePathArr = [];
         let labelsArr = [];
@@ -56,7 +57,7 @@ class App extends Component {
     const data = new FormData();
     data.append('file', e.target.files[0]);
 
-    axios.post(`http://localhost:${process.env.PORT}/images`, data)
+    axios.post(`http://localhost:${port}/images`, data)
       .then((res) => {
         this.getImages();
       });
@@ -70,7 +71,7 @@ class App extends Component {
         <input type="file" name="file" onChange={this.uploadHandler}/>
         <div id="display">
         {this.state.photos.map(photo => (
-          <img key={photo} src={`http://localhost:${process.env.PORT}/photos/${photo}`} width="150px" height="150px"/>
+          <img key={photo} src={`http://localhost:${port}/photos/${photo}`} width="150px" height="150px"/>
         ))}
         {this.state.labels.map(label => (
           <div key={label} className="text">{label}</div>

@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const app = express();
@@ -6,7 +7,7 @@ const bodyParser = require('body-parser');
 const save = require('../database/index.js').save;
 const get = require('../database/index.js').get;
 const multer = require('multer');
-require('dotenv').config();
+const port = process.env.PORT || 5000;
 
 const vision = require('@google-cloud/vision');
 const client = new vision.ImageAnnotatorClient({
@@ -63,6 +64,6 @@ app.post('/images', (req, res) => {
   });
 });
 
-app.listen(process.env.PORT, () => {
-  console.log(`App listening at port ${process.env.PORT}`);
+app.listen(port, () => {
+  console.log(`App listening at port ${port}`);
 });

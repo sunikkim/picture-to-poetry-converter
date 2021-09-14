@@ -17,6 +17,8 @@ You must also obtain a Google Vision API KEY - which will be a JSON file - by fo
 
 You will then need to add the filepath to that JSON file in an .env file. There is a .sample.env file with all required variables for guidance.
 
+Finally, you'll need to create a 'photos' folder under public (it is already .gitignored) where uploaded photos will be temporarily stored.
+
 Once set up, the app is as simple as can be: just upload an image and the rest is on us.
 
 This is a free and open source project. Feel free to take the ideas applied here and run with them — maybe even in a more useful and practical direction!
