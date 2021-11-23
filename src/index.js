@@ -5,7 +5,7 @@ import ThumbnailModal from './ThumbnailModal';
 
 const port = process.env.PORT || 5000;
 
-const randomPoetry = ['the', 'and', 'which', 'is', 'suddenly', 'almost', 'into', 'finally', 'intense', 'not', 'all', 'much', 'very', 'this', 'sleeps', 'talks', '...', '...?', '—', '(', ')', 'then', 'we', "don't", 'but', "can't", 'tells', 'unless', 'one', 'with', 'or', 'but', 'did', '...!', 'then', 'also', 'to', 'towards', 'went', 'wants', 'until', 'and', 'and', 'a', 'a', 'an', 'is', 'between', 'is like', 'decides', 'cannot wait until', 'certainly', 'is unlikely to', 'turns into', 'becomes', 'mimics', 'increases', 'gathers', 'predicts', '—', '-', 'is very', 'is like', 'hates', 'loves'];
+const randomPoetry = ['the', 'and', 'which', 'is', 'suddenly', 'almost', 'into', 'finally', 'intense', 'not', 'all', 'much', 'very', 'this', 'sleeps', 'talks', '...', '...?', '—', 'then', 'we', "don't", 'but', "can't", 'tells', 'unless', 'one', 'with', 'or', 'but', 'did', '...!', 'then', 'also', 'to', 'towards', 'went', 'wants', 'until', 'and', 'and', 'a', 'a', 'an', 'is', 'between', 'is like', 'decides', 'cannot wait until', 'certainly', 'is unlikely to', 'turns into', 'becomes', 'mimics', 'increases', 'gathers', 'predicts', '—', '-', 'is very', 'is like', 'hates', 'loves'];
 
 class App extends Component {
   constructor(props) {
@@ -19,6 +19,7 @@ class App extends Component {
     this.uploadHandler = this.uploadHandler.bind(this);
     this.getImages = this.getImages.bind(this);
     this.openThumbnail = this.openThumbnail.bind(this);
+    this.makeNewPoem = this.makeNewPoem.bind(this);
   }
 
   componentDidMount() {
@@ -95,16 +96,23 @@ class App extends Component {
     };
   }
 
+  makeNewPoem() {
+    this.getImages();
+  }
+
   render(){
     return(
       <div id="wrapper">
         <h1 id="title">Picture to Poetry Converter</h1>
-        <div id="upload-image-here">Upload an image here:</div>
-        <input type="file" name="file" onChange={this.uploadHandler}/>
+        <label className="custom-file-upload">
+          <input type="file" name="file" onChange={this.uploadHandler}/>
+          Click here to upload an image
+        </label>
+        <button id="make-new-poem" onClick={this.makeNewPoem}>Generate a new poem!</button>
         <div id="display">
           <div id="image-wrapper">
             {this.state.photos.map(photo => (
-              <img key={photo} src={`http://localhost:${port}/photos/${photo}`} width="120px" height="120px" onClick={this.openThumbnail} className="gallery-image"/>
+              <img key={photo} src={`http://localhost:${port}/photos/${photo}`} width="130px" height="130px" onClick={this.openThumbnail} className="gallery-image"/>
             ))}
           </div>
         {this.state.labels.map(label => (

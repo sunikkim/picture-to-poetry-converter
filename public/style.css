@@ -13,7 +13,7 @@
 }
 
 #image-wrapper {
-  padding-top: 15px;
+  padding-top: 20px;
   padding-bottom: 20px;
 }
 
@@ -31,8 +31,8 @@
   cursor: pointer;
 }
 
-.text, #upload-image-here {
-  width: 40%;
+.text {
+  width: 50%;
   font-family: "Garamond";
   font-weight: bold;
   text-align: center;
@@ -78,4 +78,38 @@ h1 {
 
 .close-btn:hover {
   cursor: pointer;
+}
+
+button {
+  background-color: rgb(71, 69, 69);
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  border-radius: 0.2rem;
+  margin-top: 20px;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: red;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.custom-file-upload {
+  border: 1px dashed #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-family: "Garamond";
+  font-weight: bold;
+  text-align: center;
+  margin-top: 8px;
+  margin-bottom: -4px;
 }
