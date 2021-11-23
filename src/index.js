@@ -65,14 +65,16 @@ class App extends Component {
 
   render(){
     return(
-      <div>
-        <h1>Picture to Poetry converter</h1>
-        <div>Upload an image here:</div>
+      <div id="wrapper">
+        <h1 id="title">Picture to Poetry Converter</h1>
+        <div id="upload-image-here">Upload an image here:</div>
         <input type="file" name="file" onChange={this.uploadHandler}/>
         <div id="display">
-        {this.state.photos.map(photo => (
-          <img key={photo} src={`http://localhost:${port}/photos/${photo}`} width="150px" height="150px"/>
-        ))}
+          <div id="image-wrapper">
+            {this.state.photos.map(photo => (
+              <img key={photo} src={`http://localhost:${port}/photos/${photo}`} width="120px" height="120px"/>
+            ))}
+          </div>
         {this.state.labels.map(label => (
           <div key={label} className="text">{label}</div>
         ))}

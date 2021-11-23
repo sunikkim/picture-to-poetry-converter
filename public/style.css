@@ -1,3 +1,42 @@
-.text {
-  width: 25%
+#wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#display {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#image-wrapper {
+  padding-top: 15px;
+  padding-bottom: 20px;
+}
+
+#upload-image-here {
+  font-weight: bold;
+  padding-bottom: 15px;
+  text-align: center;
+}
+
+img {
+  box-shadow: 3px 3px rgb(131, 131, 131);
+}
+
+.text, #upload-image-here {
+  width: 40%;
+  font-family: "Garamond";
+  font-weight: bold;
+  text-align: center;
+}
+
+h1 {
+  font-family: "Garamond";
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 10px;
 }
