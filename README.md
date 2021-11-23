@@ -19,7 +19,7 @@ You will then need to add the filepath to that JSON file in an .env file. There 
 
 Finally, you'll need to create a 'photos' folder under public (it is already .gitignored) where uploaded photos will be temporarily stored.
 
-Once set up, the app is as simple as can be: just upload an image and the rest is on us.
+Once set up, the app is as simple as can be: just upload an image and the rest is on us. You can freely generate new poems with your selected images, and you can also clear all images to start fresh.
 
 This is a free and open source project primarily built with React, Express.js, Node.js, and MongoDB as well as the Google Vision API. Feel free to take the ideas applied here and run with them!
 
