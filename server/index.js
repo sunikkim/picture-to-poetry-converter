@@ -4,8 +4,10 @@ const path = require('path');
 const app = express();
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const save = require('../database/index.js').save;
-const get = require('../database/index.js').get;
+const { save, get, clear } = require('../database/index.js');
+// const save = require('../database/index.js').save;
+// const get = require('../database/index.js').get;
+// const clear = require('../database/index.js').clear;
 const multer = require('multer');
 const port = process.env.PORT || 5000;
 
@@ -41,7 +43,7 @@ app.get('/images', (req, res) => {
 app.post('/images', (req, res) => {
   upload(req, res, (err) => {
     if (err) {
-      console.log(err);
+      console.error(err);
       res.sendStatus(500);
     }
 
@@ -62,6 +64,16 @@ app.post('/images', (req, res) => {
         console.error(err);
       })
   });
+});
+
+app.get('/clear', (req, res) => {
+  clear()
+    .then(() => {
+      res.sendStatus(200);
+    })
+    .catch(err => {
+      console.error(err);
+    });
 });
 
 app.listen(port, () => {

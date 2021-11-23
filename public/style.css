@@ -80,7 +80,7 @@ h1 {
   cursor: pointer;
 }
 
-button {
+#make-new-poem {
   background-color: rgb(71, 69, 69);
   border: none;
   color: white;
@@ -93,7 +93,25 @@ button {
   margin-top: 20px;
 }
 
-button:hover {
+#clear-images {
+  background-color: rgb(71, 69, 69);
+  border: none;
+  color: white;
+  padding: 10px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 13px;
+  border-radius: 0.2rem;
+  margin-top: 17px;
+}
+
+#clear-images:hover {
+  cursor: pointer;
+  background-color: red;
+}
+
+#make-new-poem:hover {
   cursor: pointer;
   background-color: red;
 }

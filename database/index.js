@@ -41,13 +41,18 @@ const save = (data, cb) => {
 const get = (cb) => {
   ImageModel.find({}, (err, images) => {
     if (err) {
-      console.log(err);
+      console.error(err);
     }
     cb(images);
   });
 }
 
+const clear = () => {
+  return ImageModel.deleteMany({});
+}
+
 module.exports = {
   save,
-  get
+  get,
+  clear
 };

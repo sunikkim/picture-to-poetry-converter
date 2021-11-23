@@ -13,13 +13,14 @@ class App extends Component {
     this.state = {
       photos: [],
       labels: [],
-      displayedImage: ''
+      displayedImage: '',
+      render: false
     };
 
     this.uploadHandler = this.uploadHandler.bind(this);
     this.getImages = this.getImages.bind(this);
     this.openThumbnail = this.openThumbnail.bind(this);
-    this.makeNewPoem = this.makeNewPoem.bind(this);
+    this.clearImages = this.clearImages.bind(this);
   }
 
   componentDidMount() {
@@ -96,8 +97,14 @@ class App extends Component {
     };
   }
 
-  makeNewPoem() {
-    this.getImages();
+  clearImages() {
+    axios.get(`http://localhost:${port}/clear`)
+      .then(() => {
+        this.getImages();
+      })
+      .catch(err => {
+        console.error(err);
+      });
   }
 
   render(){
@@ -108,7 +115,8 @@ class App extends Component {
           <input type="file" name="file" onChange={this.uploadHandler}/>
           Click here to upload an image
         </label>
-        <button id="make-new-poem" onClick={this.makeNewPoem}>Generate a new poem!</button>
+        <button id="make-new-poem" onClick={this.getImages}>Generate a new poem!</button>
+        <button id="clear-images" onClick={this.clearImages}>Clear all images</button>
         <div id="display">
           <div id="image-wrapper">
             {this.state.photos.map(photo => (
