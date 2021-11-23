@@ -18,32 +18,35 @@ const App = () => {
 
   const getImages = () => {
     axios.get(`http://localhost:${port}/images`)
-    .then(res => {
-      let imagePathArr = [];
-      let labelsArr = [];
+      .then(res => {
+        let imagePathArr = [];
+        let labelsArr = [];
 
-      res.data.forEach(image => {
-        imagePathArr.push(image.imagePath);
-        labelsArr.push(image.labels);
+        res.data.forEach(image => {
+          imagePathArr.push(image.imagePath);
+          labelsArr.push(image.labels);
+        })
+
+        let poetryLabelArr = [];
+
+        labelsArr.forEach((label) => {
+          let splitLabel = label.split('\n');
+
+          for (let i = 1; i < splitLabel.length; i += 3) {
+            let randomIndex = Math.floor(Math.random() * randomPoetry.length);
+            splitLabel.splice(i, 0, randomPoetry[randomIndex]);
+          }
+
+          let newLabel = splitLabel.join(' ');
+          poetryLabelArr.push(newLabel);
+        });
+
+        setPhotos(imagePathArr);
+        setLabels(poetryLabelArr);
       })
-
-      let poetryLabelArr = [];
-
-      labelsArr.forEach((label) => {
-        let splitLabel = label.split('\n');
-
-        for (let i = 1; i < splitLabel.length; i += 3) {
-          let randomIndex = Math.floor(Math.random() * randomPoetry.length);
-          splitLabel.splice(i, 0, randomPoetry[randomIndex]);
-        }
-
-        let newLabel = splitLabel.join(' ');
-        poetryLabelArr.push(newLabel);
+      .catch(err => {
+        console.error(err);
       });
-
-      setPhotos(imagePathArr);
-      setLabels(poetryLabelArr);
-    });
   };
 
   const handleUpload = (e) => {
@@ -51,8 +54,11 @@ const App = () => {
     data.append('file', e.target.files[0]);
 
     axios.post(`http://localhost:${port}/images`, data)
-      .then((res) => {
+      .then(res => {
         getImages();
+      })
+      .catch(err => {
+        console.error(err)
       });
   };
 

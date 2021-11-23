@@ -4,11 +4,8 @@ const path = require('path');
 const app = express();
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const { save, get, clear } = require('../database/index.js');
-// const save = require('../database/index.js').save;
-// const get = require('../database/index.js').get;
-// const clear = require('../database/index.js').clear;
 const multer = require('multer');
+const { save, get, clear } = require('../database/index.js');
 const port = process.env.PORT || 5000;
 
 const vision = require('@google-cloud/vision');
@@ -35,7 +32,7 @@ app.use(bodyParser.json());
 app.use(express.static('public'));
 
 app.get('/images', (req, res) => {
-  get((images) => {
+  get(images => {
     res.send(images);
   })
 });
@@ -49,7 +46,7 @@ app.post('/images', (req, res) => {
 
     client
       .labelDetection(path.join(__dirname, '../', req.file.path))
-      .then((results) => {
+      .then(results => {
         const labels = results[0].labelAnnotations;
         let labelsArray = [];
 
@@ -60,7 +57,7 @@ app.post('/images', (req, res) => {
         });
 
       })
-      .catch((err) => {
+      .catch(err => {
         console.error(err);
       })
   });
