@@ -4,6 +4,8 @@ For anyone who wants to find quick and easy computer-generated inspiration for t
 ## Overview ##
 This app allows the user to upload any image and be provided with an automatically generated "stream of consciousness" poem. Each image adds a "stanza" to the poem. Experiment and see if you find any surprising results!
 
+https://picture-to-poetry-converter.herokuapp.com/
+
 ## How to Get Started ##
 ```
 npm install
