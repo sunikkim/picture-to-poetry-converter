@@ -11,7 +11,7 @@ const port = process.env.PORT || 8000;
 
 const vision = require('@google-cloud/vision');
 const client = new vision.ImageAnnotatorClient({
-  keyFilename: process.env.VISION_KEY_FILEPATH
+  keyFilename: process.env.VISION_KEY_FILEPATH //
 });
 
 const upload = multer();
