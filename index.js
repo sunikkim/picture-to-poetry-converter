@@ -14,7 +14,30 @@ const client = new vision.ImageAnnotatorClient({
   keyFilename: process.env.VISION_KEY_FILEPATH //
 });
 
-const upload = multer();
+const upload = multer({
+  limits: {
+      fields: 5,
+      fieldNameSize: 50,
+      fieldSize: 20000,
+      fileSize: 15000000,
+  },
+  fileFilter: function(req, file, cb){
+    checkFileType(file, cb);
+  },
+  storage: multer.memoryStorage()
+}).single('file');
+
+const checkFileType = (file, cb) => {
+  const fileTypes = /jpeg|jpg|png|gif/;
+  const extname = fileTypes.test(path.extname(file.originalname).toLowerCase());
+  const mimetype = fileTypes.test(file.mimetype);
+
+  if (mimetype && extname) {
+    return cb(null, true);
+  } else {
+    cb('You may only upload images!');
+  }
+};
 
 app.use(cors());
 app.use(bodyParser.urlencoded({
@@ -29,8 +52,13 @@ app.get('/images', (req, res) => {
   })
 });
 
-app.post('/images', upload.any(), async (req, res) => {
-    let file = req.files[0];
+app.post('/images', async (req, res) => {
+  upload(req, res, async (err) => {
+    if (err === 'You may only upload images!' || err instanceof multer.MulterError) {
+      res.send('You may only upload images!');
+    }
+
+    let file = req.file;
     let base64string = file.buffer.toString('base64');
 
     let options = {
@@ -57,6 +85,7 @@ app.post('/images', upload.any(), async (req, res) => {
       .catch(err => {
         console.error(err);
       });
+  });
 });
 
 app.put('/images', (req, res) => {

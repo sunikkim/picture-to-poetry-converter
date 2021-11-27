@@ -64,15 +64,23 @@ const App = () => {
       return;
     }
 
-    setLoading(true);
-
     axios.post('/images', data)
-      .then(() => {
-        getImages();
+      .then((response) => {
+        setLoading(true);
+
+        return response;
+      })
+      .then((response) => {
         setLoading(false);
+
+        if (response.data === 'You may only upload images!') {
+          alert(response.data);
+          return;
+        }
+        getImages();
       })
       .catch(err => {
-        console.error(err)
+        console.error(err);
       });
   };
 
@@ -112,8 +120,6 @@ const App = () => {
   const deleteImage = (e) => {
     const imageId = e.target.id;
 
-    console.log('entered delete image', imageId);
-
     axios.put('/images', { imageId })
       .then(() => {
         getImages();
@@ -137,14 +143,13 @@ const App = () => {
       <div id="display">
         <div id="image-wrapper">
           {photos.map((photo, i) => (
-            <img key={photo + i} id={photo._id} src={photo.imagePath} width="150px" height="150px" onClick={deleteImage} className="gallery-image"/>
+            <img key={photo._id + i} id={photo._id} src={photo.imagePath} width="150px" height="150px" onClick={deleteImage} className="gallery-image"/>
           ))}
         </div>
-        {labels.map(label => (
-          <div key={label} className="text">{label}</div>
+        {labels.map((label, i) => (
+          <div key={label + i} className="text">{label}</div>
         ))}
       </div>
-      {/* <ThumbnailModal photo={displayedImage}/> */}
     </div>
   );
 };
