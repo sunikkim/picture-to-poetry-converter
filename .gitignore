@@ -39,4 +39,5 @@ bower_components/
 vKEY.json
 .env
 
-public/photos
+client/build
+client/photos

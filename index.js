@@ -6,7 +6,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const multer = require('multer');
 const { save, get, clear } = require('./database/index.js');
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 8000;
 
 const vision = require('@google-cloud/vision');
 const client = new vision.ImageAnnotatorClient({
@@ -30,6 +30,10 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 app.use(express.static('public'));
+
+if (process.env.NODE_ENV) {
+  app.use(express.static(path.join(__dirname, 'client', 'build')));
+}
 
 app.get('/images', (req, res) => {
   get(images => {
@@ -72,6 +76,10 @@ app.get('/clear', (req, res) => {
       console.error(err);
     });
 });
+
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+// });
 
 app.listen(port, () => {
   console.log(`App listening at port ${port}`);

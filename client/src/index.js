@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import ThumbnailModal from './ThumbnailModal';
 
-const port = process.env.PORT || 5000;
-
 const randomPoetry = ['the', 'and', 'which', 'is', 'suddenly', 'almost', 'into', 'finally', 'intense', 'not', 'all', 'much', 'very', 'this', 'sleeps', 'talks', '...', '...?', '—', 'then', 'we', "don't", 'but', "can't", 'tells', 'unless', 'one', 'with', 'or', 'but', 'did', '...!', 'then', 'also', 'to', 'towards', 'went', 'wants', 'until', 'and', 'and', 'a', 'a', 'an', 'is', 'between', 'is like', 'decides', 'cannot wait until', 'certainly', 'is unlikely to', 'turns into', 'becomes', 'mimics', 'increases', 'gathers', 'predicts', '—', '-', 'is very', 'is like', 'hates', 'loves'];
 
 const App = () => {
@@ -17,7 +15,7 @@ const App = () => {
   }, []);
 
   const getImages = () => {
-    axios.get(`http://localhost:${port}/images`)
+    axios.get('/images')
       .then(res => {
         let imagePathArr = [];
         let labelsArr = [];
@@ -53,7 +51,7 @@ const App = () => {
     const data = new FormData();
     data.append('file', e.target.files[0]);
 
-    axios.post(`http://localhost:${port}/images`, data)
+    axios.post('/images', data)
       .then(res => {
         getImages();
       })
@@ -86,7 +84,7 @@ const App = () => {
   };
 
   const clearImages = () => {
-    axios.get(`http://localhost:${port}/clear`)
+    axios.get('/clear')
       .then(() => {
         getImages();
       })
@@ -107,7 +105,7 @@ const App = () => {
       <div id="display">
         <div id="image-wrapper">
           {photos.map(photo => (
-            <img key={photo} src={`http://localhost:${port}/photos/${photo}`} width="130px" height="130px" onClick={openThumbnail} className="gallery-image"/>
+            <img key={photo} src={'../photos/${photo}'} width="130px" height="130px" onClick={openThumbnail} className="gallery-image"/>
           ))}
         </div>
       {labels.map(label => (
