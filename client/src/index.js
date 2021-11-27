@@ -7,7 +7,7 @@ import { Carousel } from 'react-responsive-carousel';
 
 import './style.css';
 
-const randomPoetry = ['the', 'and', 'which', 'is', 'suddenly', 'almost', 'into', 'finally', 'intense', 'not', 'all', 'much', 'very', 'this', 'sleeps', 'talks', '...', '...?', '—', 'then', 'we', "don't", 'but', "can't", 'tells', 'unless', 'one', 'with', 'or', 'but', 'did', '...!', 'then', 'also', 'to', 'towards', 'went', 'wants', 'until', 'and', 'and', 'a', 'a', 'an', 'is', 'between', 'is like', 'decides', 'cannot wait until', 'certainly', 'is unlikely to', 'turns into', 'becomes', 'mimics', 'increases', 'gathers', 'predicts', '—', '-', 'is very', 'is like', 'hates', 'loves', 'silently', 'cautiously', 'quickly', 'slowly', 'like it was', 'almost as if', 'and suddenly', 'it was miraculous', 'dancing like', 'and then', 'I stopped before', 'I found myself', 'you were', 'immense', 'one by one', 'made a sound'];
+const randomPoetry = ['the', 'and', 'which', 'is', 'suddenly', 'almost', 'into', 'finally', 'intense', 'not', 'all', 'much', 'very', 'this', 'sleeps', 'talks', '...', '...?', '—', 'then', 'we', "don't", 'but', "can't", 'tells', 'unless', 'one', 'with', 'or', 'but', 'did', '...!', 'then', 'also', 'to', 'towards', 'went', 'wants', 'until', 'and', 'and', 'a', 'a', 'an', 'is', 'between', 'is like', 'decides', 'cannot wait until', 'certainly', 'is unlikely to', 'turns into', 'becomes', 'mimics', 'increases', 'gathers', 'predicts', '—', '-', 'is very', 'is like', 'hates', 'loves', 'silently', 'cautiously', 'quickly', 'slowly', 'like it was', 'almost as if', 'and suddenly', 'it was miraculous', 'dancing like', 'and then', 'I stopped before', 'I found myself', 'you were', 'immense', 'one by one', 'made a sound', 'carefully', 'a delightful', 'messily', 'leapt', 'ran over', 'the sun', 'the moon', 'hushed', 'force'];
 
 const App = () => {
   const [photos, setPhotos] = useState([]);
@@ -36,9 +36,9 @@ const App = () => {
         labelsArr.forEach((label) => {
           let splitLabel = label.split('\n');
 
-          let randomStep = Math.floor(Math.random() * 5) + 1;
+          let randomStep = Math.floor(Math.random() * 10) + 1;
 
-          for (let i = 1; i < splitLabel.length; i += randomStep) {
+          for (let i = 1; i < splitLabel.length * 2; i += randomStep) {
             let randomIndex = Math.floor(Math.random() * randomPoetry.length);
             splitLabel.splice(i, 0, randomPoetry[randomIndex]);
             randomStep = Math.floor(Math.random() * 5) + 1;
