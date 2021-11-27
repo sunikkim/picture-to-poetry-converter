@@ -107,7 +107,7 @@ const App = () => {
       <div id="display">
         <div id="image-wrapper">
           {photos.map(photo => (
-            <img key={photo} src={`/public/photos/${photo}`} width="130px" height="130px" onClick={openThumbnail} className="gallery-image"/>
+            <img key={photo} src={photo} width="130px" height="130px" onClick={openThumbnail} className="gallery-image"/>
           ))}
         </div>
       {labels.map(label => (

@@ -6,6 +6,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const multer = require('multer');
 const { save, get, clear } = require('./database/index.js');
+const imgbbUploader = require('imgbb-uploader');
 const port = process.env.PORT || 8000;
 
 const vision = require('@google-cloud/vision');
@@ -13,16 +14,17 @@ const client = new vision.ImageAnnotatorClient({
   keyFilename: process.env.VISION_KEY_FILEPATH
 });
 
-const storage = multer.diskStorage({
-  destination: function(req, file, cb) {
-    cb(null, 'client/photos');
-  },
-  filename: (req, file, cb) => {
-    cb(null, file.originalname);
-  }
-});
+// const storage = multer.diskStorage({
+//   destination: function(req, file, cb) {
+//     cb(null, 'client/photos');
+//   },
+//   filename: (req, file, cb) => {
+//     cb(null, file.originalname);
+//   }
+// });
 
-const upload = multer({storage: storage}).single('file');
+// const upload = multer({storage: storage}).single('file');
+const upload = multer();
 
 app.use(cors());
 app.use(bodyParser.urlencoded({
@@ -37,30 +39,34 @@ app.get('/images', (req, res) => {
   })
 });
 
-app.post('/images', (req, res) => {
-  upload(req, res, (err) => {
-    if (err) {
-      console.error(err);
-      res.sendStatus(500);
-    }
+app.post('/images', upload.any(), async (req, res) => {
+    let file = req.files[0];
+    let base64string = file.buffer.toString('base64');
+
+    let options = {
+      apiKey: process.env.IMG_API_KEY,
+      base64string,
+    };
+
+    let url = await imgbbUploader(options);
+    url = url.image.url;
 
     client
-      .labelDetection(path.join(__dirname, './', req.file.path))
+      .labelDetection(url)
       .then(results => {
         const labels = results[0].labelAnnotations;
         let labelsArray = [];
 
         labels.forEach((label) => labelsArray.push(label.description + '\n'));
 
-        save([req.file.filename, labelsArray.join('').toLowerCase()], () => {
+        save([url, labelsArray.join('').toLowerCase()], () => {
           res.send([req.file, labelsArray.join('').toLowerCase()]);
         });
 
       })
       .catch(err => {
         console.error(err);
-      })
-  });
+      });
 });
 
 app.get('/clear', (req, res) => {
