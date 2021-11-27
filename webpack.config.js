@@ -21,14 +21,13 @@ module.exports = {
   resolve: { extensions: ["*", ".js", ".jsx"] },
   output: {
     path: path.resolve(__dirname, "client/build"),
-    publicPath: "/",
+    publicPath: path.resolve(__dirname, "client/build"),
     filename: "bundle.js"
   },
   devServer: {
-    // contentBase: path.join(__dirname, "client/build"),
-    // port: 3000,
-    // publicPath: "http://localhost:3000/client/",
-    // hotOnly: true
+    contentBase: path.join(__dirname, "client/build"),
+    port: 3000,
+    publicPath: "http://localhost:3000/client/",
     hot: true,
   },
   plugins: [new webpack.HotModuleReplacementPlugin()]

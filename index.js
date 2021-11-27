@@ -15,7 +15,7 @@ const client = new vision.ImageAnnotatorClient({
 
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
-    cb(null, 'public/photos');
+    cb(null, 'client/photos');
   },
   filename: (req, file, cb) => {
     cb(null, file.originalname);
@@ -29,7 +29,7 @@ app.use(bodyParser.urlencoded({
   extended: false
 }));
 app.use(bodyParser.json());
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'client', 'build')));
 
 if (process.env.NODE_ENV) {
   app.use(express.static(path.join(__dirname, 'client', 'build')));
@@ -77,9 +77,9 @@ app.get('/clear', (req, res) => {
     });
 });
 
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
-// });
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'index.html'));
+});
 
 app.listen(port, () => {
   console.log(`App listening at port ${port}`);
