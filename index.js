@@ -14,16 +14,6 @@ const client = new vision.ImageAnnotatorClient({
   keyFilename: process.env.VISION_KEY_FILEPATH
 });
 
-// const storage = multer.diskStorage({
-//   destination: function(req, file, cb) {
-//     cb(null, 'client/photos');
-//   },
-//   filename: (req, file, cb) => {
-//     cb(null, file.originalname);
-//   }
-// });
-
-// const upload = multer({storage: storage}).single('file');
 const upload = multer();
 
 app.use(cors());
