@@ -5,7 +5,7 @@ const app = express();
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const multer = require('multer');
-const { save, get, clear } = require('../database/index.js');
+const { save, get, clear } = require('./database/index.js');
 const port = process.env.PORT || 5000;
 
 const vision = require('@google-cloud/vision');
@@ -45,7 +45,7 @@ app.post('/images', (req, res) => {
     }
 
     client
-      .labelDetection(path.join(__dirname, '../', req.file.path))
+      .labelDetection(path.join(__dirname, './', req.file.path))
       .then(results => {
         const labels = results[0].labelAnnotations;
         let labelsArray = [];
