@@ -112,7 +112,7 @@ const App = () => {
       <button id="make-new-poem" onClick={getImages}>Generate a new poem!</button>
       <button id="clear-images" onClick={clearImages}>Clear all images</button>
       <div></div>
-      {loading && <div id="generating">GENERATING POETRY...</div>}
+      {loading && <div id="generating">Generating poetry...</div>}
       <div id="display">
         <div id="image-wrapper">
           {photos.map((photo, i) => (

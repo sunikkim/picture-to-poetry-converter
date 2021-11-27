@@ -52,7 +52,7 @@ h1 {
   font-weight: bold;
   text-align: center;
   margin-bottom: 10px;
-  margin-top: -40px;
+  margin-top: -50px;
   font-style: italic;
 }
 
@@ -145,12 +145,12 @@ input[type="file"] {
   font-family: "Garamond";
   font-weight: bold;
   text-align: center;
-  margin-top: 8px;
-  margin-bottom: -4px;
+  margin-top: 5px;
+  margin-bottom: -3px;
 }
 
 #generating {
-  font-family: "Garamond";
+  font-family: "Roboto";
   font-weight: bold;
   text-align: center;
   margin-top: 20px;
