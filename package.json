@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --mode development",
+    "server:dev": "webpack-dev-server --mode development",
     "build": "webpack --mode development",
-    "server": "nodemon server/index.js",
+    "start": "node index.js",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
