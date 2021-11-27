@@ -37,9 +37,9 @@ module.exports = {
     filename: "bundle.js"
   },
   devServer: {
-    contentBase: path.join(__dirname, "client/build"),
+    contentBase: path.join(__dirname, "public"),
     port: 3000,
-    publicPath: "http://localhost:3000/client/",
+    publicPath: "http://localhost:3000/client/build/",
     hot: true,
   },
   plugins: [new webpack.HotModuleReplacementPlugin()]

@@ -31,10 +31,6 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'client', 'build')));
 
-if (process.env.NODE_ENV) {
-  app.use(express.static(path.join(__dirname, 'client', 'build')));
-}
-
 app.get('/images', (req, res) => {
   get(images => {
     res.send(images);
