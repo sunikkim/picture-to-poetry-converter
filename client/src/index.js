@@ -11,6 +11,7 @@ const App = () => {
   const [photos, setPhotos] = useState([]);
   const [labels, setLabels] = useState([]);
   const [displayedImage, setDisplayedImage] = useState('');
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     getImages();
@@ -53,9 +54,12 @@ const App = () => {
     const data = new FormData();
     data.append('file', e.target.files[0]);
 
+    setLoading(true);
+
     axios.post('/images', data)
-      .then(res => {
+      .then(() => {
         getImages();
+        setLoading(false);
       })
       .catch(err => {
         console.error(err)
@@ -104,10 +108,12 @@ const App = () => {
       </label>
       <button id="make-new-poem" onClick={getImages}>Generate a new poem!</button>
       <button id="clear-images" onClick={clearImages}>Clear all images</button>
+      <br></br>
+      {loading && <div id="generating">GENERATING POETRY...</div>}
       <div id="display">
         <div id="image-wrapper">
-          {photos.map(photo => (
-            <img key={photo} src={photo} width="130px" height="130px" onClick={openThumbnail} className="gallery-image"/>
+          {photos.map((photo, i) => (
+            <img key={photo + i} src={photo} width="130px" height="130px" onClick={openThumbnail} className="gallery-image"/>
           ))}
         </div>
       {labels.map(label => (

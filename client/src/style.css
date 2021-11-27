@@ -135,3 +135,9 @@ input[type="file"] {
   margin-top: 8px;
   margin-bottom: -4px;
 }
+
+#generating {
+  font-family: "Garamond";
+  font-weight: bold;
+  text-align: center;
+}
