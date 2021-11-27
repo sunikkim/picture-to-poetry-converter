@@ -5,7 +5,7 @@ const app = express();
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const multer = require('multer');
-const { save, get, clear } = require('./database/index.js');
+const { save, get, clear, deleteImage } = require('./database/index.js');
 const imgbbUploader = require('imgbb-uploader');
 const port = process.env.PORT || 8000;
 
@@ -57,6 +57,18 @@ app.post('/images', upload.any(), async (req, res) => {
       .catch(err => {
         console.error(err);
       });
+});
+
+app.put('/images', (req, res) => {
+  const imageId = req.body.imageId;
+
+  deleteImage(imageId)
+    .then((response) => {
+      res.sendStatus(201);
+    })
+    .catch(err => {
+      console.error(err);
+    });
 });
 
 app.get('/clear', (req, res) => {

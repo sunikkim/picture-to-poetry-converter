@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import ThumbnailModal from './ThumbnailModal';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import { Carousel } from 'react-responsive-carousel';
 
 import './style.css';
 
@@ -12,6 +14,7 @@ const App = () => {
   const [labels, setLabels] = useState([]);
   const [displayedImage, setDisplayedImage] = useState('');
   const [loading, setLoading] = useState(false);
+  const [activeSlideIndex, setActiveSlideIndex] = useState(0);
 
   useEffect(() => {
     getImages();
@@ -24,7 +27,7 @@ const App = () => {
         let labelsArr = [];
 
         res.data.forEach(image => {
-          imagePathArr.push(image.imagePath);
+          imagePathArr.push(image);
           labelsArr.push(image.labels);
         })
 
@@ -56,6 +59,10 @@ const App = () => {
   const handleUpload = (e) => {
     const data = new FormData();
     data.append('file', e.target.files[0]);
+
+    if (!e.target.files[0]) {
+      return;
+    }
 
     setLoading(true);
 
@@ -102,6 +109,20 @@ const App = () => {
       });
   };
 
+  const deleteImage = (e) => {
+    const imageId = e.target.id;
+
+    console.log('entered delete image', imageId);
+
+    axios.put('/images', { imageId })
+      .then(() => {
+        getImages();
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  };
+
   return (
     <div id="wrapper">
       <h1 id="title">Picture to Poetry Converter</h1>
@@ -116,14 +137,14 @@ const App = () => {
       <div id="display">
         <div id="image-wrapper">
           {photos.map((photo, i) => (
-            <img key={photo + i} src={photo} width="150px" height="150px" onClick={openThumbnail} className="gallery-image"/>
+            <img key={photo + i} id={photo._id} src={photo.imagePath} width="150px" height="150px" onClick={deleteImage} className="gallery-image"/>
           ))}
         </div>
         {labels.map(label => (
           <div key={label} className="text">{label}</div>
         ))}
       </div>
-      <ThumbnailModal photo={displayedImage}/>
+      {/* <ThumbnailModal photo={displayedImage}/> */}
     </div>
   );
 };

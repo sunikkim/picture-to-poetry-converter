@@ -45,14 +45,19 @@ const get = (cb) => {
     }
     cb(images);
   });
-}
+};
+
+const deleteImage = (id, cb) => {
+  return ImageModel.deleteOne({ _id: id });
+};
 
 const clear = () => {
   return ImageModel.deleteMany({});
-}
+};
 
 module.exports = {
   save,
   get,
-  clear
+  clear,
+  deleteImage
 };
