@@ -111,17 +111,17 @@ const App = () => {
       </label>
       <button id="make-new-poem" onClick={getImages}>Generate a new poem!</button>
       <button id="clear-images" onClick={clearImages}>Clear all images</button>
-      <br></br>
+      <div></div>
       {loading && <div id="generating">GENERATING POETRY...</div>}
       <div id="display">
         <div id="image-wrapper">
           {photos.map((photo, i) => (
-            <img key={photo + i} src={photo} width="130px" height="130px" onClick={openThumbnail} className="gallery-image"/>
+            <img key={photo + i} src={photo} width="150px" height="150px" onClick={openThumbnail} className="gallery-image"/>
           ))}
         </div>
-      {labels.map(label => (
-        <div key={label} className="text">{label}</div>
-      ))}
+        {labels.map(label => (
+          <div key={label} className="text">{label}</div>
+        ))}
       </div>
       <ThumbnailModal photo={displayedImage}/>
     </div>

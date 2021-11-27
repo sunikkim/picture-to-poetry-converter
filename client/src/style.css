@@ -3,6 +3,12 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: rgb(255, 253, 251);
+  padding: 5% 5% 5% 5%;
+  box-shadow: 1px 1px 1px rgb(240, 240, 240);
+  border-radius: 0.5rem;
+  margin-left: 150px;
+  margin-right: 150px;
 }
 
 #display {
@@ -14,7 +20,9 @@
 
 #image-wrapper {
   padding-top: 20px;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
+  margin-top: 2px;
+  margin-bottom: 4px;
 }
 
 #upload-image-here {
@@ -24,7 +32,7 @@
 }
 
 .gallery-image {
-  box-shadow: 2px 2px rgb(73, 73, 73);
+  padding: 2px;
 }
 
 .gallery-image:hover {
@@ -32,10 +40,11 @@
 }
 
 .text {
-  width: 32%;
+  width: 40%;
   font-family: "Garamond";
-  font-weight: bold;
   text-align: center;
+  font-size: 20px;
+  font-style: italic;
 }
 
 h1 {
@@ -43,6 +52,8 @@ h1 {
   font-weight: bold;
   text-align: center;
   margin-bottom: 10px;
+  margin-top: -40px;
+  font-style: italic;
 }
 
 .modal-thumbnail {
@@ -81,7 +92,7 @@ h1 {
 }
 
 #make-new-poem {
-  background-color: rgb(71, 69, 69);
+  background-color: rgb(41, 41, 41);
   border: none;
   color: white;
   padding: 15px 32px;
@@ -92,11 +103,12 @@ h1 {
   border-radius: 0.2rem;
   margin-top: 20px;
   font-family: "Garamond";
-  font-size: 17px;
+  font-size: 19px;
+  font-style: italic;
 }
 
 #clear-images {
-  background-color: rgb(71, 69, 69);
+  background-color: rgb(41, 41, 41);
   border: none;
   color: white;
   padding: 10px 25px;
@@ -107,7 +119,8 @@ h1 {
   border-radius: 0.2rem;
   margin-top: 17px;
   font-family: "Garamond";
-  font-size: 17px;
+  font-size: 19px;
+  font-style: italic;
 }
 
 #clear-images:hover {
@@ -140,4 +153,6 @@ input[type="file"] {
   font-family: "Garamond";
   font-weight: bold;
   text-align: center;
+  margin-top: 20px;
+  font-style: italic;
 }
