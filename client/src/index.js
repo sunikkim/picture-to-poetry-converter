@@ -64,12 +64,9 @@ const App = () => {
       return;
     }
 
-    axios.post('/images', data)
-      .then((response) => {
-        setLoading(true);
+    setLoading(true);
 
-        return response;
-      })
+    axios.post('/images', data)
       .then((response) => {
         setLoading(false);
 
