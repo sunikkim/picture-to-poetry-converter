@@ -61,8 +61,6 @@ app.post('/images', async (req, res) => {
     let file = req.file;
     let base64string = file.buffer.toString('base64');
 
-    console.log(req.file);
-
     let options = {
       apiKey: process.env.IMG_API_KEY,
       base64string,
@@ -72,7 +70,7 @@ app.post('/images', async (req, res) => {
     url = url.image.url;
 
     client
-      .labelDetection(url)
+      .labelDetection(file.buffer)
       .then(results => {
         const labels = results[0].labelAnnotations;
         let labelsArray = [];
