@@ -61,6 +61,8 @@ app.post('/images', async (req, res) => {
     let file = req.file;
     let base64string = file.buffer.toString('base64');
 
+    console.log(req.file);
+
     let options = {
       apiKey: process.env.IMG_API_KEY,
       base64string,

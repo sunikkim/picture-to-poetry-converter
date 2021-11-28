@@ -15,6 +15,7 @@ const App = () => {
   const [displayedImage, setDisplayedImage] = useState('');
   const [loading, setLoading] = useState(false);
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
+  const [stanzaLength, setStanzaLength] = useState(200);
 
   useEffect(() => {
     getImages();
@@ -36,9 +37,9 @@ const App = () => {
         labelsArr.forEach((label) => {
           let splitLabel = label.split('\n');
 
-          let randomStep = Math.floor(Math.random() * 10) + 1;
+          let randomStep = Math.floor(Math.random() * 8) + 1;
 
-          for (let i = 1; i < splitLabel.length * 2; i += randomStep) {
+          for (let i = 1; i < stanzaLength; i += randomStep) {
             let randomIndex = Math.floor(Math.random() * randomPoetry.length);
             splitLabel.splice(i, 0, randomPoetry[randomIndex]);
             randomStep = Math.floor(Math.random() * 5) + 1;
@@ -126,6 +127,12 @@ const App = () => {
       });
   };
 
+  const handleStanzaLength = (e) => {
+    const length = e.target.value;
+
+    setStanzaLength(length);
+  };
+
   return (
     <div id="wrapper">
       <h1 id="title">Picture to Poetry Converter</h1>
@@ -135,6 +142,10 @@ const App = () => {
       </label>
       <button id="make-new-poem" onClick={getImages}>Generate a new poem!</button>
       <button id="clear-images" onClick={clearImages}>Clear all images</button>
+      <label id="stanza-length">
+        <div id="stanza-label">Set stanza length (1 - ∞):</div>
+        <input id="stanza-input" name="stanza-input" type="number" onChange={handleStanzaLength}/>
+      </label>
       <div></div>
       {loading && <div id="generating">Generating poetry...</div>}
       <div id="display">
