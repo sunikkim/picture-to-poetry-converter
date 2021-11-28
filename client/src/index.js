@@ -30,22 +30,29 @@ const App = () => {
         res.data.forEach(image => {
           imagePathArr.push(image);
           labelsArr.push(image.labels);
-        })
+        });
 
         let poetryLabelArr = [];
 
         labelsArr.forEach((label) => {
           let splitLabel = label.split('\n');
-
-          let randomStep = Math.floor(Math.random() * 8) + 1;
+          let randomStep = Math.floor(Math.random() * 10) + 1;
+          let newLabel = [];
 
           for (let i = 1; i < stanzaLength; i += randomStep) {
             let randomIndex = Math.floor(Math.random() * randomPoetry.length);
-            splitLabel.splice(i, 0, randomPoetry[randomIndex]);
+            let labelIndex = Math.floor(Math.random() * splitLabel.length);
+
+            if (i % 2 === 0) {
+               newLabel.push(splitLabel[labelIndex]);
+            } else {
+               newLabel.push(randomPoetry[randomIndex]);
+            }
+
             randomStep = Math.floor(Math.random() * 5) + 1;
           }
 
-          let newLabel = splitLabel.join(' ');
+          newLabel = newLabel.join(' ');
           poetryLabelArr.push(newLabel);
         });
 
@@ -129,8 +136,13 @@ const App = () => {
 
   const handleStanzaLength = (e) => {
     const length = e.target.value;
-
     setStanzaLength(length);
+  };
+
+  const handleEnterPress = (e) => {
+    if (e.key === 'Enter') {
+      getImages();
+    }
   };
 
   return (
@@ -144,7 +156,7 @@ const App = () => {
       <button id="clear-images" onClick={clearImages}>Clear all images</button>
       <label id="stanza-length">
         <div id="stanza-label">Set stanza length (1 - ∞):</div>
-        <input id="stanza-input" name="stanza-input" type="number" onChange={handleStanzaLength}/>
+        <input id="stanza-input" name="stanza-input" type="number" onChange={handleStanzaLength} onKeyPress={handleEnterPress}/>
       </label>
       <div></div>
       {loading && <div id="generating">Generating poetry...</div>}
