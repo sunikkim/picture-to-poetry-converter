@@ -15,7 +15,7 @@ const App = () => {
   const [displayedImage, setDisplayedImage] = useState('');
   const [loading, setLoading] = useState(false);
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
-  const [stanzaLength, setStanzaLength] = useState(200);
+  const [stanzaLength, setStanzaLength] = useState(10);
 
   useEffect(() => {
     getImages();
